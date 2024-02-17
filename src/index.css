@@ -69,13 +69,15 @@
 @layer base {
   * {
     @apply border-border select-none;
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff40 transparent;
     font-smooth: never;
   }
-  body {
-    @apply dark bg-[#060109] text-white font-["Dot_Kappa20"];
+  html, body {
+    @apply dark bg-transparent text-white font-["Dot_Kappa20"] border border-gray-700 rounded-xl overflow-hidden;
   }
   #root {
-    @apply h-dvh;
+    @apply bg-[#060109] h-dvh relative;
   }
 }
 

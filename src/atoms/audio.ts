@@ -8,10 +8,6 @@ export const audioElementAtom = atom(
   (get) => new Audio(get(currentSongAtom)?.url)
 );
 
-store.sub(audioElementAtom, () => {
-  store.get(audioElementAtom).crossOrigin = "anonymous";
-});
-
 export const audioContextAtom = atom(new AudioContext());
 
 export const audioMotionAnalyzerAtom = atom(
@@ -27,6 +23,8 @@ export const audioMotionAnalyzerAtom = atom(
       mode: 8, // Half octave bands
       ansiBands: true,
       weightingFilter: "A",
+      holdFrames: 10,
+      peakFallSpeed: 0.005,
     })
 );
 
@@ -34,6 +32,8 @@ store.sub(audioElementAtom, () => {
   const audioElement = store.get(audioElementAtom);
   const audioMotionAnalyzer = store.get(audioMotionAnalyzerAtom);
   const isPlaying = store.get(isPlayingAtom);
+
+  audioElement.crossOrigin = 'anonymous';
 
   audioMotionAnalyzer.disconnectInput();
   audioMotionAnalyzer.connectInput(audioElement);

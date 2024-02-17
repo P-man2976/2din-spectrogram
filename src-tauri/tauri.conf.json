@@ -16,6 +16,11 @@
         "all": true
       },
       "fs": {
+        "scope": {
+          "allow": ["C:/**/*"],
+          "deny": [],
+          "requireLiteralLeadingDot": true
+        },
         "readFile": true,
         "readDir": true
       },
@@ -34,6 +39,42 @@
       },
       "http": {
         "request": true
+      },
+      "window": {
+        "all": false,
+        "center": true,
+        "close": true,
+        "create": false,
+        "hide": true,
+        "maximize": true,
+        "minimize": true,
+        "print": false,
+        "requestUserAttention": false,
+        "setAlwaysOnTop": false,
+        "setClosable": false,
+        "setContentProtected": false,
+        "setCursorGrab": false,
+        "setCursorIcon": false,
+        "setCursorPosition": false,
+        "setCursorVisible": false,
+        "setDecorations": true,
+        "setFocus": false,
+        "setFullscreen": true,
+        "setIcon": false,
+        "setIgnoreCursorEvents": false,
+        "setMaxSize": false,
+        "setMaximizable": false,
+        "setMinSize": false,
+        "setMinimizable": false,
+        "setPosition": false,
+        "setResizable": false,
+        "setSize": false,
+        "setSkipTaskbar": false,
+        "setTitle": false,
+        "show": true,
+        "startDragging": true,
+        "unmaximize": true,
+        "unminimize": true
       }
     },
     "bundle": {
@@ -77,11 +118,14 @@
     },
     "windows": [
       {
+        "center": true,
+        "decorations": false,
         "fullscreen": false,
-        "height": 600,
         "resizable": true,
         "title": "2-DIN Car Audio Spectrogram",
-        "width": 800
+        "transparent": true,
+        "width": 1000,
+        "height": 640
       }
     ]
   }

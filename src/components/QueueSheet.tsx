@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useAtom } from "jotai";
 import { queueAtom } from "@/atoms/player";
@@ -6,7 +6,7 @@ import { Song } from "@/types/player";
 import { usePlayer } from "@/hooks/player";
 import { Reorder, useDragControls } from "framer-motion";
 import { GripVertical } from "lucide-react";
-import { toFullWidth } from "@/lib/utils";
+import { cn, toFullWidth } from "@/lib/utils";
 
 export function QueueSheet({ children }: { children: ReactNode }) {
   const [queue, setQueue] = useAtom(queueAtom);
@@ -40,6 +40,9 @@ export function QueueSheet({ children }: { children: ReactNode }) {
 
 function QueueSong({ song }: { song: Song }) {
   const { id, filename, title, album, artwork } = song;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const albumRef = useRef<HTMLSpanElement>(null);
   const controls = useDragControls();
   const { skipTo } = usePlayer();
 
@@ -62,13 +65,35 @@ function QueueSong({ song }: { song: Song }) {
           <div className="size-12 rounded-md bg-gray-500/50 shrink-0"></div>
         )}
         <div
+          ref={containerRef}
           className="flex flex-col w-full overflow-hidden hover:cursor-pointer"
           onClick={() => skipTo(id)}
         >
-          <span className=" text-lg whitespace-nowrap">
+          <span
+            ref={titleRef}
+            className={cn("text-lg whitespace-nowrap w-fit", {
+              "animate-scroll":
+                (titleRef.current?.clientWidth ?? 0) >
+                (containerRef.current?.clientWidth ?? 0),
+            })}
+            style={{
+              animationDuration: `${(title ?? filename).length ?? 0}s`,
+            }}
+          >
             {toFullWidth(title ?? filename)}
           </span>
-          <span className="text-gray-400 whitespace-nowrap min-w-full w-fit animate-scroll">
+          <span
+            ref={albumRef}
+            className={cn(
+              "text-gray-400 whitespace-nowrap w-fit",
+              {
+                "animate-scroll":
+                  (albumRef.current?.clientWidth ?? 0) >
+                  (containerRef.current?.clientWidth ?? 0),
+              }
+            )}
+            style={{ animationDuration: `${album?.length ?? 0}s` }}
+          >
             {toFullWidth(album)}
           </span>
         </div>

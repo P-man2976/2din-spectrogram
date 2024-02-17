@@ -1,11 +1,11 @@
 import * as THREE from "three";
-import { Fragment, useRef } from "react";
+import { Fragment, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { MeshStandardMaterial } from "three";
 import { atom, getDefaultStore, useAtomValue } from "jotai";
 import { audioMotionAnalyzerAtom } from "../atoms/audio";
 import { AnalyzerBarData } from "audiomotion-analyzer";
-import { Line, Text } from "@react-three/drei";
+import { Line, Plane, Text } from "@react-three/drei";
 
 const spectrogramAtom = atom<AnalyzerBarData[] | null>(null);
 const store = getDefaultStore();
@@ -60,7 +60,10 @@ export function Visualizer() {
               colIndex={colIndex}
             />
           ))}
-          <mesh key='freq-number' rotation-x={(Math.PI / 180) * ANALYZER_ANGLE_DEGREE}>
+          <mesh
+            key="freq-number"
+            rotation-x={(Math.PI / 180) * ANALYZER_ANGLE_DEGREE}
+          >
             <Line
               points={[
                 [
@@ -102,7 +105,6 @@ export function Visualizer() {
         <meshStandardMaterial color='red' />
       </mesh> */}
     </mesh>
-
   );
 }
 
@@ -113,7 +115,7 @@ function VisualizerCell({
   rowIndex: number;
   colIndex: number;
 }) {
-  const color = new THREE.Color();
+  const color = useMemo(() => new THREE.Color(), []);
   const meshMaterialRef = useRef<MeshStandardMaterial>(null);
 
   useFrame(() => {
@@ -136,15 +138,15 @@ function VisualizerCell({
   });
 
   return (
-    <mesh
+    <Plane
       position={[
         (CELL_WIDTH + ROW_CELL_GAP) * rowIndex + ROW_CELL_GAP,
         (CELL_HEIGHT + COL_CELL_GAP) * colIndex + COL_CELL_GAP,
         0,
       ]}
+      args={[CELL_WIDTH, CELL_HEIGHT, 1]}
     >
-      <planeGeometry args={[CELL_WIDTH, CELL_HEIGHT, 1]} />
       <meshStandardMaterial ref={meshMaterialRef} />
-    </mesh>
+    </Plane>
   );
 }

@@ -15,7 +15,7 @@ export function FilePicker() {
 
   return (
     <Button
-      className="p-4 w-4/5 max-w-screen-md gap-4"
+      className="p-4 w-full h-full max-w-screen-md gap-4"
       // variant='ghost'
       onClick={async () => {
         const selected = await open({
@@ -91,7 +91,7 @@ export function FilePicker() {
       }}
     >
       <StepBack className="rotate-90" fill='white' />
-      ファイルの読み込み
+      ファイルポップアップから読み込み
     </Button>
   );
 }

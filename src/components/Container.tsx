@@ -9,7 +9,7 @@ export function Container({ children }: { children: ReactNode }) {
       <ambientLight color={0xffffff} intensity={Math.PI / 2} />
       {children}
       {/* </OrthographicCamera> */}
-      <StatsGl className="right-0" />
+      <StatsGl minimal />
     </Canvas>
   );
 }

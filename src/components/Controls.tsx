@@ -3,16 +3,16 @@ import { IconPlayerPause, IconPlayerPlay } from "@tabler/icons-react";
 import { Button } from "./ui/button";
 import { useEffect } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
+import { ChevronLeft, ChevronRight, FastForward, Music } from "lucide-react";
 import { audioElementAtom } from "@/atoms/audio";
 import { currentSongAtom, progressStrAtom } from "@/atoms/player";
 import { displayStringAtom } from "@/atoms/display";
-import { FilePicker } from "./FilePicker";
-import { ChevronLeft, ChevronRight, FastForward, Music } from "lucide-react";
 import { QueueSheet } from "./QueueSheet";
 import { MenuSheet } from "./MenuSheet";
 import { SidebarButton } from "./player/SidebarButton";
-import { toFullWidth } from "@/lib/utils";
 import { ProgressSlider } from "./player/ProgressSlider";
+import { Titlebar } from "./titlebar/Titlebar";
+import { SongInfo } from "./player/SongInfo";
 
 export function Controls() {
   const audioElement = useAtomValue(audioElementAtom);
@@ -46,11 +46,9 @@ export function Controls() {
   }, [audioElement, next]);
 
   return (
-    <div className="fixed inset-0 flex flex-col gap-2 w-full">
+    <div className="absolute inset-0 flex flex-col gap-2 w-full">
       {/* Header */}
-      <div className="flex justify-center p-8">
-        <FilePicker />
-      </div>
+      <Titlebar />
       {/* Sidebar */}
       <div className="h-full flex items-center justify-between">
         <MenuSheet>
@@ -70,28 +68,16 @@ export function Controls() {
         <div className="flex gap-8 items-center">
           {currentSong?.artwork ? (
             <img
-              className="h-20 grow-0 rounded-md shadow-lg"
+              className="h-20 grow-0 rounded-md shadow-lg shrink-0"
               src={currentSong.artwork}
             />
           ) : (
-            <div className="size-20 rounded-md shadow-lg grid place-content-center bg-gray-500/50">
+            <div className="size-20 shrink-0 rounded-md shadow-lg grid place-content-center bg-gray-500/50">
               <Music />
             </div>
           )}
-          <div className="flex flex-col gap-1">
-            <h2 className=" text-xl">
-              {toFullWidth(
-                currentSong?.title ?? currentSong?.filename ?? "再生停止中"
-              )}
-            </h2>
-            <span className="text-sm text-gray-400">
-              {toFullWidth(currentSong?.album)}
-            </span>
-            <span className="text-sm text-gray-400">
-              {toFullWidth(currentSong?.artists?.join(","))}
-            </span>
-          </div>
-          <div className="flex gap-4 ml-auto">
+          <SongInfo song={currentSong} />
+          <div className="flex gap-4 ml-auto shrink-0">
             <Button
               size="icon-lg"
               variant="ghost"

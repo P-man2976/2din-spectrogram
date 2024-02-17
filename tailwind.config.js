@@ -1,3 +1,6 @@
+/* eslint-disable */
+const plugin = require("tailwindcss/plugin");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -66,18 +69,33 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        scroll: {
-          "0%": { transform: "translateX(100%)" },
-          "40%, 60%": { transform: "translatex(0)" },
-          "100%": { transform: "translateX(-100%)" },
-        },
+        // scroll: {
+        //   "0%": { transform: "translateX(100%)" },
+        //   "40%, 60%": { transform: "translatex(0)" },
+        //   "100%": { transform: "translateX(-100%)" },
+        // },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        scroll: "scroll 10s linear infinite"
+        // scroll: "scroll 10s linear infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        ".animate-scroll": {
+          animation: "5s scroll 10s linear infinite",
+          animationRange: "60% 40%",
+          "@keyframes scroll": {
+            "0%": { transform: "translateX(100%)" },
+            "40%, 60%": { transform: "translatex(0)" },
+            "100%": { transform: "translateX(-100%)" },
+          },
+        },
+      });
+    }),
+  ],
 };

@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function toFullWidth(str?: string) {
-  str = str?.replace(/[A-Za-z0-9]/g, function (s) {
+  str = str?.replace(/[A-Za-z0-9!?]/g, function (s) {
     return String.fromCharCode(s.charCodeAt(0) + 0xfee0);
   });
   return str;

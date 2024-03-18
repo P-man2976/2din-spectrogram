@@ -1,5 +1,6 @@
 import { ICommonTagsResult } from "music-metadata/lib/type";
 
+export type Source = "file" | "radio" | "aux" | "off";
 export interface Song
   extends Pick<
     ICommonTagsResult,

@@ -1,0 +1,130 @@
+{
+  "$schema": "../schema.json",
+  "TBC": {
+    "area": ["JP4"],
+    "type": "AM",
+    "name": "TBCラジオ",
+    "frequencies_fm": [
+      {
+        "area": ["仙台"],
+        "frequency": 93.5,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["仙台"],
+        "frequency": 1260,
+        "primary": true
+      },
+      {
+        "area": ["気仙沼"],
+        "frequency": 801,
+        "primary": false
+      },
+      {
+        "area": ["志津川"],
+        "frequency": 1215,
+        "primary": false
+      },
+      {
+        "area": ["鳴子"],
+        "frequency": 1557,
+        "primary": false
+      }
+    ]
+  },
+  "DATEFM": {
+    "area": ["JP4"],
+    "type": "FM",
+    "name": "Date fm エフエム仙台",
+    "frequencies_fm": [
+      {
+        "area": ["仙台"],
+        "frequency": 77.1,
+        "primary": true
+      },
+      {
+        "area": ["気仙沼"],
+        "frequency": 81.3,
+        "primary": false
+      },
+      {
+        "area": ["白石"],
+        "frequency": 81.4,
+        "primary": false
+      },
+      {
+        "area": ["鳴子", "志津川"],
+        "frequency": 84.1,
+        "primary": false
+      }
+    ]
+  },
+  "JOHK": {
+    "area": ["JP4"],
+    "type": "AM",
+    "name": "NHKラジオ第1（宮城）",
+    "frequencies_am": [
+      {
+        "area": ["仙台"],
+        "frequency": 891,
+        "primary": true
+      },
+      {
+        "area": ["志津川"],
+        "frequency": 981,
+        "primary": false
+      },
+      {
+        "area": ["気仙沼", "鳴子"],
+        "frequency": 1161,
+        "primary": false
+      }
+    ]
+  },
+  "JOHB": {
+    "area": ["JP4"],
+    "type": "AM",
+    "name": "NHKラジオ第2（宮城）",
+    "frequencies_am": [
+      {
+        "area": ["仙台"],
+        "frequency": 1089,
+        "primary": true
+      },
+      {
+        "area": ["気仙沼"],
+        "frequency": 1539,
+        "primary": false
+      }
+    ]
+  },
+  "JOHK-FM": {
+    "area": ["JP4"],
+    "type": "FM",
+    "name": "NHK-FM（宮城）",
+    "frequencies_fm": [
+      {
+        "area": ["仙台"],
+        "frequency": 82.5,
+        "primary": true
+      },
+      {
+        "area": ["白石"],
+        "frequency": 84.3,
+        "primary": false
+      },
+      {
+        "area": ["気仙沼"],
+        "frequency": 84.6,
+        "primary": false
+      },
+      {
+        "area": ["鳴子", "志津川"],
+        "frequency": 85.2,
+        "primary": false
+      }
+    ]
+  }
+}

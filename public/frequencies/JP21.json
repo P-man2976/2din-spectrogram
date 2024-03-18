@@ -1,0 +1,219 @@
+{
+  "$schema": "../schema.json",
+  "CBC": {
+    "area": ["JP21"],
+    "type": "AM",
+    "name": "CBCラジオ",
+    "frequencies_fm": [
+      {
+        "area": ["三国山"],
+        "frequency": 93.7,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["名古屋"],
+        "frequency": 1053,
+        "primary": true
+      },
+      {
+        "area": ["熊野"],
+        "frequency": 720,
+        "primary": false
+      },
+      {
+        "area": ["尾鷲"],
+        "frequency": 801,
+        "primary": false
+      },
+      {
+        "area": ["神岡", "下呂"],
+        "frequency": 1062,
+        "primary": false
+      },
+      {
+        "area": ["豊橋", "上野"],
+        "frequency": 1485,
+        "primary": false
+      },
+      {
+        "area": ["高山", "中津川", "新城"],
+        "frequency": 1557,
+        "primary": false
+      }
+    ]
+  },
+  "TOKAIRADIO": {
+    "area": ["JP21"],
+    "type": "AM",
+    "name": "TOKAI RADIO",
+    "frequencies_fm": [
+      {
+        "area": ["三国山"],
+        "frequency": 92.9,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["新城"],
+        "frequency": 1332,
+        "primary": true
+      },
+      {
+        "area": ["恵那"],
+        "frequency": 801,
+        "primary": false
+      },
+      {
+        "area": ["豊橋"],
+        "frequency": 864,
+        "primary": false
+      },
+      {
+        "area": ["尾鷲"],
+        "frequency": 1062,
+        "primary": false
+      },
+      {
+        "area": ["神岡"],
+        "frequency": 1458,
+        "primary": false
+      },
+      {
+        "area": ["高山", "熊野", "下呂"],
+        "frequency": 1485,
+        "primary": false
+      },
+      {
+        "area": ["上野"],
+        "frequency": 1557,
+        "primary": false
+      }
+    ]
+  },
+  "GBS": {
+    "area": ["JP21"],
+    "type": "AM",
+    "name": "ぎふチャン",
+    "frequencies_fm": [
+      {
+        "area": ["上加納山"],
+        "frequency": 90.4,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["岐阜"],
+        "frequency": 1431,
+        "primary": true
+      },
+      {
+        "area": ["高山", "神岡"],
+        "frequency": 720,
+        "primary": false
+      },
+      {
+        "area": ["萩原"],
+        "frequency": 1197,
+        "primary": false
+      },
+      {
+        "area": ["多治見", "恵那"],
+        "frequency": 1431,
+        "primary": false
+      }
+    ]
+  },
+  "FMGIFU": {
+    "area": ["JP21"],
+    "type": "FM",
+    "name": "FM GIFU",
+    "frequencies_fm": [
+      {
+        "area": ["岐阜"],
+        "frequency": 80.0,
+        "primary": true
+      },
+      {
+        "area": ["中津川"],
+        "frequency": 78.3,
+        "primary": false
+      },
+      {
+        "area": ["郡上八幡", "神岡流葉"],
+        "frequency": 79.3,
+        "primary": false
+      },
+      {
+        "area": ["高山"],
+        "frequency": 80.0,
+        "primary": false
+      },
+      {
+        "area": ["土岐南"],
+        "frequency": 81.5,
+        "primary": false
+      },
+      {
+        "area": ["下呂"],
+        "frequency": 82.1,
+        "primary": false
+      }
+    ]
+  },
+  "JOOP-FM": {
+    "area": ["JP21"],
+    "type": "FM",
+    "name": "NHk-FM（岐阜）",
+    "frequencies_fm": [
+      {
+        "area": ["岐阜"],
+        "frequency": 83.6,
+        "primary": true
+      },
+      {
+        "area": ["飛騨金山"],
+        "frequency": 83.1,
+        "primary": false
+      },
+      {
+        "area": ["宮"],
+        "frequency": 84.3,
+        "primary": false
+      },
+      {
+        "area": ["下呂"],
+        "frequency": 84.4,
+        "primary": false
+      },
+      {
+        "area": ["土岐南"],
+        "frequency": 84.8,
+        "primary": false
+      },
+      {
+        "area": ["神岡"],
+        "frequency": 85.3,
+        "primary": false
+      },
+      {
+        "area": ["郡上八幡", "小坂"],
+        "frequency": 85.6,
+        "primary": false
+      },
+      {
+        "area": ["中津川"],
+        "frequency": 85.8,
+        "primary": false
+      },
+      {
+        "area": ["高山"],
+        "frequency": 86.1,
+        "primary": false
+      }
+    ]
+  }
+}

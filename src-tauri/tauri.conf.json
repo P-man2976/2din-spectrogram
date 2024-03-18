@@ -17,7 +17,7 @@
       },
       "fs": {
         "scope": {
-          "allow": ["C:/**/*"],
+          "allow": ["**"],
           "deny": [],
           "requireLiteralLeadingDot": true
         },
@@ -38,13 +38,14 @@
         "assetScope": ["**"]
       },
       "http": {
-        "request": true
+        "request": true,
+        "scope": ["https://*"]
       },
       "window": {
         "all": false,
         "center": true,
         "close": true,
-        "create": false,
+        "create": true,
         "hide": true,
         "maximize": true,
         "minimize": true,

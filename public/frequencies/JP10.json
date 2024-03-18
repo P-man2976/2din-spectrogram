@@ -1,0 +1,97 @@
+{
+  "$schema": "../schema.json",
+  "FMGUNMA": {
+    "area": ["JP10"],
+    "type": "FM",
+    "name": "FM GUNMA",
+    "frequencies_fm": [
+      {
+        "area": ["前橋"],
+        "frequency": 86.3,
+        "primary": true
+      },
+      {
+        "area": ["草津"],
+        "frequency": 76.7,
+        "primary": false
+      },
+      {
+        "area": ["沼田"],
+        "frequency": 77.8,
+        "primary": false
+      },
+      {
+        "area": ["利根"],
+        "frequency": 79.4,
+        "primary": false
+      },
+      {
+        "area": ["長野原"],
+        "frequency": 82.0,
+        "primary": false
+      },
+      {
+        "area": ["榛名"],
+        "frequency": 82.2,
+        "primary": false
+      },
+      {
+        "area": ["鬼石"],
+        "frequency": 87.1,
+        "primary": false
+      },
+      {
+        "area": ["万場"],
+        "frequency": 88.0,
+        "primary": false
+      }
+    ]
+  },
+  "JOTP-FM": {
+    "area": ["JP10"],
+    "type": "FM",
+    "name": "NHK-FM（群馬）",
+    "frequencies_fm": [
+      {
+        "area": ["前橋"],
+        "frequency": 81.6,
+        "primary": true
+      },
+      {
+        "area": ["榛名"],
+        "frequency": 80.5,
+        "primary": false
+      },
+      {
+        "area": ["長野原"],
+        "frequency": 83.1,
+        "primary": false
+      },
+      {
+        "area": ["沼田"],
+        "frequency": 83.4,
+        "primary": false
+      },
+      {
+        "area": ["利根"],
+        "frequency": 83.8,
+        "primary": false
+      },
+      {
+        "area": ["草津"],
+        "frequency": 84.2,
+        "primary": false
+      },
+      {
+        "area": ["万場"],
+        "frequency": 85.9,
+        "primary": false
+      },
+      {
+        "area": ["三波川"],
+        "frequency": 89.0,
+        "primary": false
+      }
+    ]
+  }
+}

@@ -1,8 +1,10 @@
 import { formatTime } from "@/lib/time";
-import { Song } from "@/types/player";
+import { Song, Source } from "@/types/player";
 import { atom } from "jotai";
 
 export const isPlayingAtom = atom(false);
+
+export const currentSrcAtom = atom<Source>("file");
 
 export const currentSongAtom = atom<Song | null>(null);
 export const queueAtom = atom<Song[]>([]);

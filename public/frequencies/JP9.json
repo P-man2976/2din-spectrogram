@@ -1,0 +1,111 @@
+{
+  "$schema": "../schema.json",
+  "CRT": {
+    "area": ["JP9"],
+    "type": "AM",
+    "name": "CRT栃木放送",
+    "frequencies_fm": [
+      {
+        "area": ["宇都宮"],
+        "frequency": 94.1,
+        "primary": true
+      },
+      {
+        "area": ["足利"],
+        "frequency": 91.1,
+        "primary": false
+      },
+      {
+        "area": ["葛生", "今市", "塩原"],
+        "frequency": 93.4,
+        "primary": false
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["宇都宮"],
+        "frequency": 1530,
+        "primary": true
+      },
+      {
+        "area": ["那須"],
+        "frequency": 864,
+        "primary": false
+      },
+      {
+        "area": ["足利"],
+        "frequency": 1062,
+        "primary": false
+      }
+    ]
+  },
+  "RADIOBERRY": {
+    "area": ["JP9"],
+    "type": "FM",
+    "name": "RADIO BERRY",
+    "frequencies_fm": [
+      {
+        "area": ["宇都宮"],
+        "frequency": 76.4,
+        "primary": true
+      },
+      {
+        "area": ["足利"],
+        "frequency": 78.3,
+        "primary": false
+      },
+      {
+        "area": ["塩原"],
+        "frequency": 78.5,
+        "primary": false
+      },
+      {
+        "area": ["今市"],
+        "frequency": 79.1,
+        "primary": false
+      },
+      {
+        "area": ["葛生"],
+        "frequency": 84.4,
+        "primary": false
+      }
+    ]
+  },
+  "JOBP-FM": {
+    "area": ["JP9"],
+    "type": "FM",
+    "name": "NHK-FM（栃木）",
+    "frequencies_fm": [
+      {
+        "area": ["宇都宮"],
+        "frequency": 80.3,
+        "primary": true
+      },
+      {
+        "area": ["葛生"],
+        "frequency": 82.9,
+        "primary": false
+      },
+      {
+        "area": ["足利"],
+        "frequency": 83.7,
+        "primary": false
+      },
+      {
+        "area": ["今市"],
+        "frequency": 84.0,
+        "primary": false
+      },
+      {
+        "area": ["塩原"],
+        "frequency": 84.0,
+        "primary": false
+      },
+      {
+        "area": ["足尾"],
+        "frequency": 86.5,
+        "primary": false
+      }
+    ]
+  }
+}

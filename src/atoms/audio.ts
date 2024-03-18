@@ -1,11 +1,13 @@
 import { atom, getDefaultStore } from "jotai";
 import AudioMotionAnalyzer from "audiomotion-analyzer";
-import { currentSongAtom, isPlayingAtom } from "./player";
+import { currentSongAtom, currentSrcAtom, isPlayingAtom } from "./player";
 
 const store = getDefaultStore();
 
-export const audioElementAtom = atom(
-  (get) => new Audio(get(currentSongAtom)?.url)
+export const audioElementAtom = atom((get) =>
+  get(currentSrcAtom) === "radio"
+    ? new Audio()
+    : new Audio(get(currentSongAtom)?.url)
 );
 
 export const audioContextAtom = atom(new AudioContext());
@@ -33,7 +35,7 @@ store.sub(audioElementAtom, () => {
   const audioMotionAnalyzer = store.get(audioMotionAnalyzerAtom);
   const isPlaying = store.get(isPlayingAtom);
 
-  audioElement.crossOrigin = 'anonymous';
+  audioElement.crossOrigin = "anonymous";
 
   audioMotionAnalyzer.disconnectInput();
   audioMotionAnalyzer.connectInput(audioElement);

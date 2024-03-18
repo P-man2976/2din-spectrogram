@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "patternProperties": {
+    ".*": {
+      "type": "object",
+      "properties": {
+        "area": {
+          "type": "array"
+        },
+        "type": {
+          "enum": ["AM", "FM"]
+        },
+        "name": {
+          "type": "string"
+        },
+        "frequencies_am": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "area": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "frequency": {
+                "type": "number",
+                "minimum": 531,
+                "maximum": 1602
+              },
+              "primary": {
+                "type": "boolean"
+              }
+            },
+            "required": ["area", "frequency", "primary"]
+          },
+          "uniqueItems": true
+        },
+        "frequencies_fm": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "area": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "frequency": {
+                "type": "number",
+                "minimum": 76.1,
+                "maximum": 94.9
+              },
+              "primary": {
+                "type": "boolean"
+              }
+            },
+            "required": ["area", "frequency", "primary"]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["area", "type", "name"],
+      "patternProperties": {}
+    }
+  }
+}

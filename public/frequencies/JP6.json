@@ -1,0 +1,160 @@
+{
+  "$schema": "../schema.json",
+  "YBC": {
+    "area": ["JP6"],
+    "type": "AM",
+    "name": "YBC山形放送",
+    "frequencies_fm": [
+      {
+        "area": ["村山"],
+        "frequency": 92.4,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["山形", "米沢", "鶴岡", "新庄", "酒田", "小国"],
+        "frequency": 918,
+        "primary": true
+      }
+    ]
+  },
+  "RFM": {
+    "area": ["JP6"],
+    "type": "FM",
+    "name": "Rhythm Station エフエム山形",
+    "frequencies_fm": [
+      {
+        "area": ["山形"],
+        "frequency": 80.4,
+        "primary": true
+      },
+      {
+        "area": ["鶴岡"],
+        "frequency": 76.9,
+        "primary": false
+      },
+      {
+        "area": ["米沢"],
+        "frequency": 77.3,
+        "primary": false
+      },
+      {
+        "area": ["新庄"],
+        "frequency": 78.2,
+        "primary": false
+      }
+    ]
+  },
+  "JOJG": {
+    "area": ["JP6"],
+    "type": "AM",
+    "name": "NHKラジオ第1（山形）",
+    "frequencies_am": [
+      {
+        "area": ["山形"],
+        "frequency": 540,
+        "primary": true
+      },
+      {
+        "area": ["米沢"],
+        "frequency": 1026,
+        "primary": false
+      },
+      {
+        "area": ["新庄"],
+        "frequency": 1341,
+        "primary": false
+      },
+      {
+        "area": ["鶴岡"],
+        "frequency": 1368,
+        "primary": false
+      },
+      {
+        "area": ["小国", "温海"],
+        "frequency": 1584,
+        "primary": false
+      }
+    ]
+  },
+  "JOJC": {
+    "area": ["JP6"],
+    "type": "AM",
+    "name": "NHKラジオ第2（山形）",
+    "frequencies_am": [
+      {
+        "area": ["山形"],
+        "frequency": 1521,
+        "primary": true
+      },
+      {
+        "area": ["鶴岡"],
+        "frequency": 1035,
+        "primary": false
+      },
+      {
+        "area": ["米沢"],
+        "frequency": 1359,
+        "primary": false
+      },
+      {
+        "area": ["新庄"],
+        "frequency": 1539,
+        "primary": false
+      }
+    ]
+  },
+  "JOJG-FM": {
+    "area": ["JP6"],
+    "type": "FM",
+    "name": "NHK-FM（山形）",
+    "frequencies_fm": [
+      {
+        "area": ["山形"],
+        "frequency": 82.1,
+        "primary": true
+      },
+      {
+        "area": ["朝日"],
+        "frequency": 83.7,
+        "primary": false
+      },
+      {
+        "area": ["白鷹"],
+        "frequency": 84.0,
+        "primary": false
+      },
+      {
+        "area": ["米沢"],
+        "frequency": 84.2,
+        "primary": false
+      },
+      {
+        "area": ["長井"],
+        "frequency": 84.6,
+        "primary": false
+      },
+      {
+        "area": ["温海"],
+        "frequency": 84.8,
+        "primary": false
+      },
+      {
+        "area": ["鶴岡"],
+        "frequency": 86.0,
+        "primary": false
+      },
+      {
+        "area": ["新庄"],
+        "frequency": 88.3,
+        "primary": false
+      },
+      {
+        "area": ["小国"],
+        "frequency": 89.8,
+        "primary": false
+      }
+    ]
+  }
+}

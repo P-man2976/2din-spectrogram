@@ -74,7 +74,7 @@
     font-smooth: never;
   }
   html, body {
-    @apply dark bg-transparent text-white font-["Dot_Kappa20"] border border-gray-700 rounded-xl overflow-hidden;
+    @apply dark bg-transparent text-white font-["Dot_Kappa20"] overflow-hidden;
   }
   #root {
     @apply bg-[#060109] h-dvh relative;

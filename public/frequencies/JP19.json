@@ -1,0 +1,100 @@
+{
+  "$schema": "../schema.json",
+  "YBS": {
+    "area": ["JP19"],
+    "type": "AM",
+    "name": "YBSラジオ",
+    "frequencies_fm": [
+      {
+        "area": ["甲府", "身延", "三ッ峠"],
+        "frequency": 90.9,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["甲府"],
+        "frequency": 765,
+        "primary": true
+      },
+      {
+        "area": ["大月", "上野原", "富士吉田"],
+        "frequency": 765,
+        "primary": false
+      }
+    ]
+  },
+  "FM-FUJI": {
+    "area": ["JP19"],
+    "type": "FM",
+    "name": "FM FUJI",
+    "frequencies_fm": [
+      {
+        "area": ["甲府"],
+        "frequency": 83.0,
+        "primary": true
+      },
+      {
+        "area": ["三ッ峠"],
+        "frequency": 78.6,
+        "primary": false
+      },
+      {
+        "area": ["身延"],
+        "frequency": 80.5,
+        "primary": false
+      }
+    ]
+  },
+  "JOKG": {
+    "area": ["JP19"],
+    "type": "AM",
+    "name": "NHKラジオ第1（山梨）",
+    "frequencies_am": [
+      {
+        "area": ["甲府"],
+        "frequency": 927,
+        "primary": true
+      },
+      {
+        "area": ["富士吉田"],
+        "frequency": 1584,
+        "primary": false
+      }
+    ]
+  },
+  "JOKC": {
+    "area": ["JP19"],
+    "type": "AM",
+    "name": "NHKラジオ第2（山梨）",
+    "frequencies_am": [
+      {
+        "area": ["甲府"],
+        "frequency": 1602,
+        "primary": true
+      }
+    ]
+  },
+  "JOKG-FM": {
+    "area": ["JP19"],
+    "type": "FM",
+    "name": "NHK-FM（山梨）",
+    "frequencies_fm": [
+      {
+        "area": ["甲府"],
+        "frequency": 85.6,
+        "primary": true
+      },
+      {
+        "area": ["身延"],
+        "frequency": 84.7,
+        "primary": false
+      },
+      {
+        "area": ["三ッ峠"],
+        "frequency": 86.0,
+        "primary": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "$schema": "../schema.json",
+  "TBS": {
+    "area": ["JP8"],
+    "type": "AM",
+    "name": "TBSラジオ",
+    "frequencies_fm": [
+      {
+        "area": ["東京"],
+        "frequency": 90.5,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["東京"],
+        "frequency": 954,
+        "primary": true
+      }
+    ]
+  },
+  "QRR": {
+    "area": ["JP8"],
+    "type": "AM",
+    "name": "文化放送",
+    "frequencies_fm": [
+      {
+        "area": ["東京"],
+        "frequency": 91.6,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["東京"],
+        "frequency": 1134,
+        "primary": true
+      }
+    ]
+  },
+  "LFR": {
+    "area": ["JP8"],
+    "type": "AM",
+    "name": "ニッポン放送",
+    "frequencies_fm": [
+      {
+        "area": ["東京"],
+        "frequency": 93.0,
+        "primary": true
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["東京"],
+        "frequency": 1242,
+        "primary": true
+      }
+    ]
+  },
+  "INT": {
+    "area": ["JP6"],
+    "type": "FM",
+    "name": "Interfm",
+    "frequencies_fm": [
+      {
+        "area": ["東京"],
+        "frequency": 89.7,
+        "primary": true
+      },
+      {
+        "area": ["横浜"],
+        "frequency": 76.5,
+        "primary": false
+      }
+    ]
+  },
+  "FMT": {
+    "area": ["JP6"],
+    "type": "FM",
+    "name": "TOKYO FM",
+    "frequencies_fm": [
+      {
+        "area": ["東京"],
+        "frequency": 80.0,
+        "primary": true
+      },
+      {
+        "area": ["青梅"],
+        "frequency": 83.6,
+        "primary": false
+      },
+      {
+        "area": ["槍原"],
+        "frequency": 86.6,
+        "primary": false
+      },
+      {
+        "area": ["八王子"],
+        "frequency": 80.5,
+        "primary": false
+      },
+      {
+        "area": ["新島"],
+        "frequency": 76.7,
+        "primary": false
+      },
+      {
+        "area": ["八丈"],
+        "frequency": 84.3,
+        "primary": false
+      }
+    ]
+  },
+  "FMJ": {
+    "area": ["JP6"],
+    "type": "FM",
+    "name": "J-WAVE",
+    "frequencies_fm": [
+      {
+        "area": ["東京"],
+        "frequency": 81.3,
+        "primary": true
+      },
+      {
+        "area": ["湊"],
+        "frequency": 88.3,
+        "primary": false
+      }
+    ]
+  },
+  "JOAK": {
+    "area": ["JP6"],
+    "type": "AM",
+    "name": "NHKラジオ第1（東京）",
+    "frequencies_fm": [
+      {
+        "area": ["小笠原"],
+        "frequency": 82.6,
+        "primary": false
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["東京"],
+        "frequency": 594,
+        "primary": true
+      }
+    ]
+  },
+  "JOAB": {
+    "area": ["JP6"],
+    "type": "AM",
+    "name": "NHKラジオ第2（東京）",
+    "frequencies_fm": [
+      {
+        "area": ["小笠原"],
+        "frequency": 84.6,
+        "primary": false
+      }
+    ],
+    "frequencies_am": [
+      {
+        "area": ["東京"],
+        "frequency": 693,
+        "primary": true
+      }
+    ]
+  },
+  "JOAK-FM": {
+    "area": ["JP6"],
+    "type": "FM",
+    "name": "NHK-FM（東京）",
+    "frequencies_fm": [
+      {
+        "area": ["東京"],
+        "frequency": 82.5,
+        "primary": true
+      },
+      {
+        "area": ["新島"],
+        "frequency": 77.5,
+        "primary": false
+      },
+      {
+        "area": ["八丈"],
+        "frequency": 82.9,
+        "primary": false
+      },
+      {
+        "area": ["小笠原村"],
+        "frequency": 79.6,
+        "primary": false
+      }
+    ]
+  }
+}

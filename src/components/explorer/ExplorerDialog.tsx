@@ -84,6 +84,7 @@ export function ExplorerDialog({ children }: { children: ReactNode }) {
 
     const {
       common: { title, track, album, artists, genre, date, year, picture },
+      format: { duration }
     } = await fetchFromUrl(url);
 
     console.log(await fetchFromUrl(url));
@@ -100,6 +101,7 @@ export function ExplorerDialog({ children }: { children: ReactNode }) {
       genre,
       date,
       year,
+      duration,
       artwork: picture?.[0]
         ? URL.createObjectURL(
             new Blob([picture[0].data], {

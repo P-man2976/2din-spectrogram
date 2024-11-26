@@ -36,8 +36,8 @@ export function Titlebar() {
         data-tauri-drag-region
         className="absolute inset-0 bg-gradient-to-b to-transparent from-gray-600/50 opacity-50 group-hover:opacity-100 transition-all duration-500"
       />
-      <div className="flex w-full">
-        <span className="text-lg">{currentSong?.title}</span>
+      <div className="flex w-full items-center">
+        <span className="text-sm">{currentSong?.title} / {currentSong?.album} / {currentSong?.artists?.join(', ')}</span>
         <div className="z-10 flex ml-auto shrink-0 items-start">
           <TitlebarButton
             onClick={() => appWindow.setFullscreen(!isFullscreen)}

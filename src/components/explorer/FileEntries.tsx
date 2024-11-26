@@ -22,6 +22,13 @@ export function FileEntries({ path }: { path: string }) {
     queryFn: async () => await readDir(path, { recursive: false }),
   });
 
+  const { data: rootdir } = useQuery({
+    queryKey: ["explorer", "root"],
+    queryFn: async () => await readDir("**", { recursive: false }),
+  });
+
+  console.log(rootdir);
+
   return (
     <div className="flex flex-col overflow-y-auto">
       {data?.map((file) => (

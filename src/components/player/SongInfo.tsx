@@ -1,22 +1,19 @@
-import { cn, toFullWidth } from "@/lib/utils";
-import { Song } from "@/types/player";
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
+import { cn } from "@/lib/utils";
 
-export function SongInfo({ song }: { song: Song | null }) {
+export function SongInfo({
+  title,
+  artist,
+  album
+}: {
+  title?: string;
+  artist?: string;
+  album?: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const albumRef = useRef<HTMLSpanElement>(null);
   const artistRef = useRef<HTMLSpanElement>(null);
-
-  const songTitle = useMemo(
-    () => toFullWidth(song?.title ?? song?.filename) ?? "再生停止中",
-    [song]
-  );
-  const songAlbum = useMemo(() => toFullWidth(song?.album), [song]);
-  const songArtist = useMemo(
-    () => toFullWidth(song?.artists?.join(",")),
-    [song]
-  );
 
   return (
     <div
@@ -30,23 +27,20 @@ export function SongInfo({ song }: { song: Song | null }) {
             (titleRef.current?.clientWidth ?? 0) >
             (containerRef.current?.clientWidth ?? 0),
         })}
-        style={{ animationDuration: `${songTitle.length}s` }}
+        style={{ animationDuration: `${title?.length}s` }}
       >
-        {songTitle}
+        {title}
       </h2>
       <span
         ref={albumRef}
-        className={cn(
-          "text-sm text-gray-400 whitespace-nowrap w-fit",
-          {
-            "animate-scroll":
-              (albumRef.current?.clientWidth ?? 0) >
-              (containerRef.current?.clientWidth ?? 0),
-          }
-        )}
-        style={{ animationDuration: `${songAlbum?.length ?? 0}s` }}
+        className={cn("text-sm text-gray-400 whitespace-nowrap w-fit", {
+          "animate-scroll":
+            (albumRef.current?.clientWidth ?? 0) >
+            (containerRef.current?.clientWidth ?? 0),
+        })}
+        style={{ animationDuration: `${album?.length ?? 0}s` }}
       >
-        {songAlbum}
+        {album}
       </span>
       <span
         ref={artistRef}
@@ -56,7 +50,7 @@ export function SongInfo({ song }: { song: Song | null }) {
             (containerRef.current?.clientWidth ?? 0),
         })}
       >
-        {songArtist}
+        {artist}
       </span>
     </div>
   );

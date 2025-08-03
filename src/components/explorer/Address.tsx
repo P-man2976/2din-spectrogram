@@ -14,10 +14,10 @@ export function Address() {
   const { queue, path, push, back, advance } = useAddress();
   const { data: parentPath } = useQuery({
     queryKey: ["explorer", path, "parent"],
-    queryFn: async () => await join(path, ".."),
+    queryFn: async () => await join(path ?? "/", ".."),
   });
 
-  const pathArray = path?.split(sep);
+  const pathArray = path?.split(sep());
 
   return (
     <div className="flex gap-2 items-center">

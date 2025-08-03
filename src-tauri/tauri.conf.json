@@ -3,120 +3,49 @@
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev -- --force",
-    "devPath": "http://localhost:5173",
-    "distDir": "../dist"
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173"
   },
-  "package": {
-    "productName": "2din-spectrogram",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "path": {
-        "all": true
-      },
-      "fs": {
-        "scope": {
-          "allow": ["**"],
-          "deny": [],
-          "requireLiteralLeadingDot": true
-        },
-        "readFile": true,
-        "readDir": true
-      },
-      "dialog": {
-        "all": false,
-        "ask": false,
-        "confirm": false,
-        "message": false,
-        "open": true,
-        "save": false
-      },
-      "protocol": {
-        "all": false,
-        "asset": true,
-        "assetScope": ["**"]
-      },
-      "http": {
-        "request": true,
-        "scope": ["https://*"]
-      },
-      "window": {
-        "all": false,
-        "center": true,
-        "close": true,
-        "create": true,
-        "hide": true,
-        "maximize": true,
-        "minimize": true,
-        "print": false,
-        "requestUserAttention": false,
-        "setAlwaysOnTop": false,
-        "setClosable": false,
-        "setContentProtected": false,
-        "setCursorGrab": false,
-        "setCursorIcon": false,
-        "setCursorPosition": false,
-        "setCursorVisible": false,
-        "setDecorations": true,
-        "setFocus": false,
-        "setFullscreen": true,
-        "setIcon": false,
-        "setIgnoreCursorEvents": false,
-        "setMaxSize": false,
-        "setMaximizable": false,
-        "setMinSize": false,
-        "setMinimizable": false,
-        "setPosition": false,
-        "setResizable": false,
-        "setSize": false,
-        "setSkipTaskbar": false,
-        "setTitle": false,
-        "show": true,
-        "startDragging": true,
-        "unmaximize": true,
-        "unminimize": true
-      }
+  "bundle": {
+    "active": true,
+    "category": "DeveloperTool",
+    "copyright": "",
+    "targets": "all",
+    "externalBin": [],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
     },
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
+    "longDescription": "",
+    "macOS": {
+      "entitlements": null,
+      "exceptionDomain": "",
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null
+    },
+    "resources": [],
+    "shortDescription": "",
+    "linux": {
       "deb": {
         "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.tauri.dev",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": [],
-      "shortDescription": "",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
       }
-    },
-    "security": {
-      "csp": "default-src 'self' img-src 'self' media-src https://asset.localhost; asset: https://asset.localhost"
-    },
-    "updater": {
-      "active": false
-    },
+    }
+  },
+  "productName": "2din-spectrogram",
+  "mainBinaryName": "2din-spectrogram",
+  "version": "0.1.0",
+  "identifier": "com.pman2976.2din-spectrogram",
+  "plugins": {},
+  "app": {
     "windows": [
       {
         "center": true,
@@ -124,10 +53,30 @@
         "fullscreen": false,
         "resizable": true,
         "title": "2-DIN Car Audio Spectrogram",
-        "transparent": true,
         "width": 1000,
-        "height": 640
+        "height": 640,
+        "useHttpsScheme": true
       }
-    ]
+    ],
+    "security": {
+      "assetProtocol": {
+        "scope": ["**"],
+        "enable": true
+      },
+      "csp": {
+        "default-src": "'self' customprotocol: asset:",
+        "connect-src": "'self' https://fonts.gstatic.com https://cdn.jsdelivr.net ipc: http://ipc.localhost",
+        "font-src": [
+          "'self'",
+          "https://fonts.gstatic.com",
+          "https://cdn.jsdelivr.net"
+        ],
+        "img-src": "'self' asset: http://asset.localhost blob: data:",
+        "media-src": "'self' asset: http://asset.localhost",
+        "style-src": "'unsafe-inline' 'self' https://fonts.googleapis.com",
+        "script-src": "'self'",
+        "worker-src": "'self' blob:"
+      }
+    }
   }
 }

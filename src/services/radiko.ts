@@ -1,9 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { ResponseType, getClient } from "@tauri-apps/api/http";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { fetch } from "@tauri-apps/plugin-http";
 import { Parser as M3U8Parser } from "m3u8-parser";
 import { XMLParser } from "fast-xml-parser";
 
-const client = await getClient();
 const xmlParser = new XMLParser();
 
 export function useRadikoToken() {
@@ -12,8 +11,7 @@ export function useRadikoToken() {
     queryFn: async () => {
       const authKey = "bcd151073c03b352e1ef2fd66c32209da9ca0afa";
 
-      const resAuth1 = await client.get("https://radiko.jp/v2/api/auth1", {
-        responseType: ResponseType.Text,
+      const resAuth1 = await fetch("https://radiko.jp/v2/api/auth1", {
         headers: {
           "X-Radiko-App": "pc_html5",
           "X-Radiko-App-Version": "0.0.1",
@@ -25,16 +23,15 @@ export function useRadikoToken() {
       if (resAuth1.status !== 200)
         throw new Error("[Error] Radiko Auth1 failed", { cause: resAuth1 });
 
-      const authToken = resAuth1.headers["x-radiko-authtoken"];
-      const keyLength = Number(resAuth1.headers["x-radiko-keylength"]);
-      const keyOffset = Number(resAuth1.headers["x-radiko-keyoffset"]);
+      const authToken = resAuth1.headers.get("x-radiko-authtoken");
+      const keyLength = Number(resAuth1.headers.get("x-radiko-keylength"));
+      const keyOffset = Number(resAuth1.headers.get("x-radiko-keyoffset"));
       const partialKey = btoa(authKey.slice(keyOffset, keyOffset + keyLength));
 
       if (!authToken)
         throw new Error("[Error] Failed to get X-Radiko-AuthToken");
 
-      const resAuth2 = await client.get("https://radiko.jp/v2/api/auth2", {
-        responseType: ResponseType.Text,
+      const resAuth2 = await fetch("https://radiko.jp/v2/api/auth2", {
         headers: {
           "X-Radiko-AuthToken": authToken,
           "X-Radiko-PartialKey": partialKey,
@@ -58,11 +55,9 @@ export function useRadikoArea() {
   return useQuery({
     queryKey: ["radio", "radiko", "area"],
     queryFn: async () => {
-      const res = await client.get<string>("https://radiko.jp/area", {
-        responseType: ResponseType.Text,
-      });
+      const res = await fetch("https://radiko.jp/area");
 
-      const areaCode = (res.data).match(/class="(.*)"/)?.[1];
+      const areaCode = (await res.text()).match(/class="(.*)"/)?.[1];
 
       return areaCode;
     },
@@ -75,40 +70,37 @@ export function useRadikoStationList(areaId?: string) {
   return useQuery({
     queryKey: ["radio", "radiko", areaId ?? data, "stations"],
     queryFn: async () => {
-      const res = await client.get<string>(
-        `https://radiko.jp/v3/station/list/${areaId ?? data}.xml`,
-        { responseType: ResponseType.Text }
+      const res = await fetch(
+        `https://radiko.jp/v3/station/list/${areaId ?? data}.xml`
       );
 
-      return xmlParser.parse(res.data).stations.station as RadikoStation[];
+      return xmlParser.parse(await res.text()).stations
+        .station as RadikoStation[];
     },
     enabled: !!(areaId ?? data),
   });
 }
 
-export function useRadikoM3u8Url(stationId: string) {
+export function useRadikoM3u8Url() {
   const { data: token } = useRadikoToken();
 
-  return useQuery({
-    queryKey: ["radio", "radiko", stationId, "m3u8"],
-    queryFn: async () => {
+  return useMutation<string, Error, string>({
+    mutationFn: async (stationId) => {
       const m3u8Parser = new M3U8Parser();
+
       m3u8Parser.push(
-        (
-          await client.get(
+        await (
+          await fetch(
             `https://si-f-radiko.smartstream.ne.jp/so/playlist.m3u8?station_id=${stationId}&type=b&l=15&lsid=11cbd3124cef9e8004f9b5e9f77b66`,
             {
-              headers: { "X-Radiko-AuthToken": token },
-              responseType: ResponseType.Text,
+              headers: { "X-Radiko-AuthToken": token! },
             }
           )
-        ).data
+        ).text()
       );
       m3u8Parser.end();
 
       return m3u8Parser.manifest.playlists[0].uri;
     },
-    staleTime: 0,
-    enabled: !!token,
   });
 }

@@ -1,7 +1,7 @@
-import { open } from "@tauri-apps/api/dialog";
+import { open } from "@tauri-apps/plugin-dialog";
 import { fetchFromUrl } from "music-metadata-browser";
 import { Button } from "./ui/button";
-import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { useAtom, useSetAtom } from "jotai";
 import { currentSongAtom, queueAtom } from "@/atoms/player";
 import { displayStringAtom } from "@/atoms/display";

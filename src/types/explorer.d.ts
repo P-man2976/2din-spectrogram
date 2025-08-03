@@ -1,5 +1,3 @@
+import { DirEntry } from "@tauri-apps/plugin-fs";
 
-interface SelectedFile {
-  path: string;
-  dir: boolean;
-}
+export type SelectedFile = DirEntry & { path: string };

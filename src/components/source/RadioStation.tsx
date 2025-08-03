@@ -4,7 +4,6 @@ import {
   radioStationSizeAtom,
 } from "@/atoms/radio";
 import { cn } from "@/lib/utils";
-import { useRadikoM3u8Url } from "@/services/radiko";
 import { useRadioFrequencies } from "@/services/radio";
 import { useAtom, useAtomValue } from "jotai";
 import {
@@ -18,13 +17,13 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "../ui/context-menu";
+import { Button } from "../ui/button";
 
 export function RadioStation({ name, id, logo }: RadikoStation) {
   const [currentRadio, setCurrentRadio] = useAtom(currentRadioAtom);
   const [customFreqList, setCustomFreqList] = useAtom(customFrequencyAreaAtom);
   const size = useAtomValue(radioStationSizeAtom);
 
-  const { data: m3u8, error: m3u8Error } = useRadikoM3u8Url(id);
   const { data: frequencies } = useRadioFrequencies();
 
   const customFreq = customFreqList.find((station) => station.id === id);
@@ -41,23 +40,22 @@ export function RadioStation({ name, id, logo }: RadikoStation) {
 
   const isSelected = currentRadio?.name === name;
 
-  if (m3u8Error) return <div>{m3u8Error.message}</div>;
-
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>
-        <button
+        <Button
+          variant={"ghost"}
           className={cn(
-            "flex gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-500/50 transition-all group",
+            "flex justify-start h-full gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-500/50 transition-all group",
             isSelected && "bg-gray-500/30 border"
           )}
           onClick={() =>
             setCurrentRadio({
               type,
+              source: "radiko",
+              id,
               frequency,
               name,
-              source: "radiko",
-              url: m3u8,
             })
           }
         >
@@ -82,7 +80,7 @@ export function RadioStation({ name, id, logo }: RadikoStation) {
               <span className="text-lg ">{name}</span>
             </div>
           )}
-        </button>
+        </Button>
       </ContextMenuTrigger>
       <ContextMenuContent className="min-w-[12rem]">
         <ContextMenuCheckboxItem>お気に入り</ContextMenuCheckboxItem>
@@ -104,11 +102,8 @@ export function RadioStation({ name, id, logo }: RadikoStation) {
 
                 if (isSelected)
                   setCurrentRadio({
-                    type,
+                    ...currentRadio,
                     frequency: Number(freq),
-                    name,
-                    source: "radiko",
-                    url: m3u8,
                   });
               }}
             >

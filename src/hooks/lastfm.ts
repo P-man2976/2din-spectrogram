@@ -42,35 +42,35 @@ export const useLastfmTracking = () => {
     console.log(await res.text());
   };
 
-  const scrobble = async ({ title, track, album, artists, duration }: Song) => {
-    if (!title || !artists?.length || !session?.key) return;
+  // const scrobble = async ({ title, track, album, artists, duration }: Song) => {
+  //   if (!title || !artists?.length || !session?.key) return;
 
-    const params = {
-      method: "track.scrobble",
-      track: title,
-      artist: artists?.join(","),
-      album,
-      trackNumber: track.no?.toString(),
-      duration: duration ? Math.floor(duration).toString() : undefined,
-      api_key: import.meta.env.VITE_LASTFM_APIKEY,
-      sk: session.key,
-    };
+  //   const params = {
+  //     method: "track.scrobble",
+  //     track: title,
+  //     artist: artists?.join(","),
+  //     album,
+  //     trackNumber: track.no?.toString(),
+  //     duration: duration ? Math.floor(duration).toString() : undefined,
+  //     api_key: import.meta.env.VITE_LASTFM_APIKEY,
+  //     sk: session.key,
+  //   };
 
-    console.log(`Start scrobbling ${title} on Last.fm`);
+  //   console.log(`Start scrobbling ${title} on Last.fm`);
 
-    const res = await fetch("http://ws.audioscrobbler.com/2.0", {
-      method: "POST",
-      body: Object.entries({
-        ...params,
-        format: "json",
-        api_sig: deriveLastfmSignature(params),
-      })
-        .map(([k, v]) => v && `${k}=${v}`)
-        .join("&"),
-    });
+  //   const res = await fetch("http://ws.audioscrobbler.com/2.0", {
+  //     method: "POST",
+  //     body: Object.entries({
+  //       ...params,
+  //       format: "json",
+  //       api_sig: deriveLastfmSignature(params),
+  //     })
+  //       .map(([k, v]) => v && `${k}=${v}`)
+  //       .join("&"),
+  //   });
 
-    console.log(await res.text());
-  };
+  //   console.log(await res.text());
+  // };
 
   return { startTrack };
 };

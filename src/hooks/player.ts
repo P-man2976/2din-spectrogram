@@ -12,7 +12,7 @@ import {
 import { useLastfmTracking } from "./lastfm";
 
 export const usePlayer = () => {
-  const [currentSrc, setCurrentSrc] = useAtom(currentSrcAtom);
+  const [, setCurrentSrc] = useAtom(currentSrcAtom);
   const [isPlaying, setIsPlaying] = useAtom(isPlayingAtom);
   const [currentSong, setCurrentSong] = useAtom(currentSongAtom);
   const [queue, setQueue] = useAtom(queueAtom);

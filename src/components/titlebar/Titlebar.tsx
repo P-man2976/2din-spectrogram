@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
-import { appWindow } from "@tauri-apps/api/window";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import {
   VscChromeClose,
   VscChromeMaximize,
@@ -13,6 +13,8 @@ import { SourceSheet } from "../SourceSheet";
 import { ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
 import { currentSongAtom } from "@/atoms/player";
+
+const appWindow = getCurrentWebviewWindow()
 
 export function Titlebar() {
   const currentSong = useAtomValue(currentSongAtom);

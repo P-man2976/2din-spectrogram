@@ -2,7 +2,7 @@ import { audioElementAtom } from "@/atoms/audio";
 import { useAddress } from "@/hooks/explorer";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { FileEntry, readDir } from "@tauri-apps/api/fs";
+import { DirEntry, readDir } from "@tauri-apps/plugin-fs";
 import { useAtom, useAtomValue } from "jotai";
 import { Folder } from "lucide-react";
 import mime from "mime/lite";
@@ -15,16 +15,25 @@ import {
   ContextMenuContent,
   ContextMenuTrigger,
 } from "../ui/context-menu";
+import { join } from "@tauri-apps/api/path";
 
 export function FileEntries({ path }: { path: string }) {
   const { data } = useQuery({
     queryKey: ["explorer", path],
-    queryFn: async () => await readDir(path, { recursive: false }),
+    queryFn: async () =>
+      await Promise.all(
+        (
+          await readDir(path)
+        ).map(async (file) => ({
+          ...file,
+          path: await join(path, file.name),
+        }))
+      ),
   });
 
   const { data: rootdir } = useQuery({
     queryKey: ["explorer", "root"],
-    queryFn: async () => await readDir("**", { recursive: false }),
+    queryFn: async () => await readDir("**"),
   });
 
   console.log(rootdir);
@@ -38,7 +47,12 @@ export function FileEntries({ path }: { path: string }) {
   );
 }
 
-function Entry({ path, name, children }: FileEntry) {
+function Entry({
+  path,
+  name,
+  isDirectory,
+  ...rest
+}: DirEntry & { path: string }) {
   const audioElement = useAtomValue(audioElementAtom);
   const [selected, setSelected] = useAtom(explorerSelectedFilesAtom);
   const { push } = useAddress();
@@ -48,7 +62,6 @@ function Entry({ path, name, children }: FileEntry) {
     [audioElement, path]
   );
   const isSelected = selected.some((file) => path.includes(file.path));
-  const isDirectory = !!children;
   const isDisabled = !canPlay && !isDirectory;
 
   const toggleSelected = useCallback(() => {
@@ -56,9 +69,9 @@ function Entry({ path, name, children }: FileEntry) {
       setSelected((prev) =>
         isSelected
           ? prev.filter((file) => file.path !== path)
-          : [...prev, { path, dir: isDirectory }]
+          : [...prev, { path, name, isDirectory, ...rest }]
       );
-  }, [setSelected, path, isDisabled, isSelected, isDirectory]);
+  }, [setSelected, path, isDisabled, isSelected, isDirectory, name, rest]);
 
   return (
     <ContextMenu>

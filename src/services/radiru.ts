@@ -1,22 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import { ResponseType, getClient } from "@tauri-apps/api/http";
+import { fetch } from "@tauri-apps/plugin-http";
 import { XMLParser } from "fast-xml-parser";
 
-const client = await getClient();
 const xmlParser = new XMLParser();
 
 export function useRadiruStationList() {
   return useQuery({
     queryKey: ["radio", "radiru", "stations"],
     queryFn: async () => {
-      const res = await client.get<string>(
-        "https://www.nhk.or.jp/radio/config/config_web.xml",
-        {
-          responseType: ResponseType.Text,
-        }
+      const res = await fetch(
+        "https://www.nhk.or.jp/radio/config/config_web.xml"
       );
 
-      const config = xmlParser.parse(res.data) as RadiruConfig;
+      const config = xmlParser.parse(await res.text()) as RadiruConfig;
 
       return config.radiru_config.stream_url.data;
     },

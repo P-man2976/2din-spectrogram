@@ -20,6 +20,7 @@ import { Titlebar } from "./titlebar/Titlebar";
 import { CoverImage } from "./player/controls/CoverImage";
 import { ControlButtons } from "./player/controls/Buttons";
 import { toFullWidth } from "@/lib/utils";
+import { useRadikoM3u8Url } from "@/services/radiko";
 
 const hls = new Hls();
 
@@ -31,6 +32,8 @@ export function Controls() {
   const currentRadio = useAtomValue(currentRadioAtom);
   const progressStr = useAtomValue(progressStrAtom);
   const setDisplayString = useSetAtom(displayStringAtom);
+
+  const { mutate } = useRadikoM3u8Url();
 
   const title = useMemo(() => {
     switch (currentSrc) {
@@ -110,7 +113,7 @@ export function Controls() {
       case "file":
         displayStr = `CD-${
           currentSong?.track.no?.toString().padStart(2, "0") ?? 13
-        }   ${progressStr}`;
+        }${progressStr.padStart(7, " ")}`;
         break;
 
       case "radio":
@@ -148,12 +151,24 @@ export function Controls() {
 
   useEffect(() => {
     if (currentSrc === "radio" && currentRadio) {
-      hls.loadSource(currentRadio.url);
-      hls.attachMedia(audioElement);
+      if (currentRadio.source === "radiko") {
+        // m3u8 URLの期限切れを避けるために、毎回取得する
+        mutate(currentRadio.id, {
+          onSuccess: (m3u8) => {
+            console.log ("[HLS] Loaded new m3u8 URL:", m3u8);
+            hls.loadSource(m3u8);
+            hls.attachMedia(audioElement);
 
-      play();
+            play();
+          },
+        });
+      } else if (currentRadio.source === "radiru") {
+        hls.loadSource(currentRadio.url);
+        hls.attachMedia(audioElement);
+
+        play();
+      }
     }
-
     return () => {
       // hls.destroy();
       hls.stopLoad();

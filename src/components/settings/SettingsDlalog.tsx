@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
-import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
-import { invoke } from "@tauri-apps/api/tauri";
+import { WebviewWindow, getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { invoke } from "@tauri-apps/api/core";
 import { Event } from "@tauri-apps/api/event";
 import { useAtom } from "jotai";
 import { lastfmSessionAtom } from "@/atoms/lastfm";
 import { LuLogOut } from "react-icons/lu";
 import { deriveLastfmSignature } from "@/lib/lastfm";
+const appWindow = getCurrentWebviewWindow()
 
 export function SettingsDialog({ children }: { children: ReactNode }) {
   const [lastfmSession, setLastfmSession] = useAtom(lastfmSessionAtom);

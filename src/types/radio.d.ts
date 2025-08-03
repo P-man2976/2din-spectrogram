@@ -1,14 +1,22 @@
-type RadioType = "AM" | "FM"
+type RadioType = "AM" | "FM";
 
-interface Radio {
-  type: RadioType;
-  source: "radiko" | "radiru";
+type Radio = (
+  | {
+      type: RadioType;
+      source: "radiko";
+      id: string;
+    }
+  | {
+      type: RadioType;
+      source: "radiru";
+      url: string;
+    }
+) & {
   name: string;
-  url: string;
   frequency?: number;
   logo?: string;
   channel?: number;
-}
+};
 
 interface RadikoStation {
   id: string;
@@ -48,7 +56,7 @@ interface RadiruStation {
 }
 
 interface FrequencyList {
-  [key: string]: FrequencyStation
+  [key: string]: FrequencyStation;
 }
 
 type FrequencyStation =

@@ -14,9 +14,9 @@ export function QueueSheet({ children }: { children: ReactNode }) {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="max-w-md sm:min-w-96 overflow-y-auto">
+      <SheetContent className="max-w-sm sm:min-w-96 overflow-y-auto px-4">
         <div className="flex flex-col gap-4">
-          <h3 className="font-bold text-xl">再生待ち</h3>
+          <h3 className="font-bold text-xl pl-2">再生待ち</h3>
           <Reorder.Group
             as="div"
             className=""
@@ -53,25 +53,25 @@ function QueueSong({ song }: { song: Song }) {
       dragListener={false}
       dragControls={controls}
     >
-      <div className="flex items-center gap-4 first:rounded-t-lg last:rounded-b-lg pr-4 py-2">
+      <div className="flex items-center gap-2 first:rounded-t-lg last:rounded-b-lg pr-4 py-2">
         <GripVertical
           className="text-gray-400 hover:cursor-move touch-none"
           size={20}
           onPointerDown={(e) => controls.start(e)}
         />
         {artwork ? (
-          <img src={artwork} className="h-12 rounded-md" />
+          <img src={artwork} className="h-10 rounded-sm" />
         ) : (
           <div className="size-12 rounded-md bg-gray-500/50 shrink-0"></div>
         )}
         <div
           ref={containerRef}
-          className="flex flex-col w-full overflow-hidden hover:cursor-pointer"
+          className="flex flex-col gap-1 w-full overflow-hidden hover:cursor-pointer"
           onClick={() => skipTo(id)}
         >
           <span
             ref={titleRef}
-            className={cn("text-lg whitespace-nowrap w-fit", {
+            className={cn("text-md whitespace-nowrap w-fit", {
               "animate-scroll":
                 (titleRef.current?.clientWidth ?? 0) >
                 (containerRef.current?.clientWidth ?? 0),
@@ -85,7 +85,7 @@ function QueueSong({ song }: { song: Song }) {
           <span
             ref={albumRef}
             className={cn(
-              "text-gray-400 whitespace-nowrap w-fit",
+              "text-gray-400 text-sm whitespace-nowrap w-fit",
               {
                 "animate-scroll":
                   (albumRef.current?.clientWidth ?? 0) >

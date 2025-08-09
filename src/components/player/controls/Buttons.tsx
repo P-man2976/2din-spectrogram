@@ -15,6 +15,7 @@ export function ControlButtons() {
   return (
     <div className="flex gap-4 ml-auto shrink-0">
       <Button
+        disabled={currentSrc === "aux"}
         size="icon-lg"
         variant="ghost"
         className=" p-2 text-white text-2xl"
@@ -27,6 +28,7 @@ export function ControlButtons() {
         )}
       </Button>
       <Button
+        disabled={currentSrc === "aux"}
         size="icon-lg"
         variant="ghost"
         className=" p-2 text-white text-4xl"
@@ -49,6 +51,7 @@ export function ControlButtons() {
         )}
       </Button>
       <Button
+        disabled={currentSrc === "aux"}
         size="icon-lg"
         variant="ghost"
         className=" p-2 text-white text-2xl"

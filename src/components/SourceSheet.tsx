@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { FilePicker } from "./FilePicker";
 import { ExplorerDialog } from "./explorer/ExplorerDialog";
@@ -14,10 +14,18 @@ import { Separator } from "./ui/separator";
 import { radioStationSizeAtom } from "@/atoms/radio";
 import { LuLayoutGrid, LuLayoutList } from "react-icons/lu";
 import { cn } from "@/lib/utils";
+import { ScreenShare } from "./source/ScreenShare";
+import { ExternalInput } from "./source/ExternalInput";
+import { mediaStreamAtom } from "@/atoms/audio";
+import { DisconnectInput } from "./source/DisconnectInput";
+import { useMediaStream } from "@/hooks/mediastream";
 
 export function SourceSheet({ children }: { children: ReactNode }) {
   const [currentSrc, setCurrentSrc] = useAtom(currentSrcAtom);
   const [radioStationSize, setRadioStationSize] = useAtom(radioStationSizeAtom);
+  const mediaStream = useAtomValue(mediaStreamAtom);
+
+  const { disconnect } = useMediaStream();
 
   const { data: radikoStationList } = useRadikoStationList();
   const { data: radiruStationList } = useRadiruStationList();
@@ -28,11 +36,19 @@ export function SourceSheet({ children }: { children: ReactNode }) {
       <SheetContent side="top" className="max-h-[80vh] overflow-y-auto">
         <Tabs
           value={currentSrc}
-          onValueChange={(value) => setCurrentSrc(value as "file" | "radio")}
+          onValueChange={(value) => {
+            setCurrentSrc(value as "file" | "radio" | "aux");
+
+            if (value !== "aux") {
+              // 外部入力を切断
+              disconnect();
+            }
+          }}
         >
-          <TabsList className="grid grid-cols-2 w-full">
+          <TabsList className="grid grid-cols-3 w-full">
             <TabsTrigger value="file">ファイル</TabsTrigger>
             <TabsTrigger value="radio">ラジオ</TabsTrigger>
+            <TabsTrigger value="aux">外部入力</TabsTrigger>
           </TabsList>
           <TabsContent className="py-4" value="file">
             <div className="flex w-full flex-col items-center gap-4">
@@ -52,7 +68,7 @@ export function SourceSheet({ children }: { children: ReactNode }) {
               <div className="flex w-full justify-between items-center">
                 <h4 className="text-lg">Radiko</h4>
                 <Button
-                size='icon'
+                  size="icon"
                   onClick={() =>
                     setRadioStationSize((size) => (size === "lg" ? "sm" : "lg"))
                   }
@@ -67,7 +83,9 @@ export function SourceSheet({ children }: { children: ReactNode }) {
               <div
                 className={cn(
                   "grid gap-4",
-                  radioStationSize === "lg" ? "grid-cols-3" : "grid-cols-[repeat(auto-fit,minmax(100px,1fr))]"
+                  radioStationSize === "lg"
+                    ? "grid-cols-3"
+                    : "grid-cols-[repeat(auto-fit,minmax(100px,1fr))]"
                 )}
               >
                 {radikoStationList?.map((station) => (
@@ -81,6 +99,18 @@ export function SourceSheet({ children }: { children: ReactNode }) {
                   <RadiruStation key={station.areakey} {...station} />
                 ))}
               </div>
+            </div>
+          </TabsContent>
+          <TabsContent className="py-4" value="aux">
+            <div className="flex w-full items-center gap-4">
+              {mediaStream ? (
+                <DisconnectInput />
+              ) : (
+                <>
+                  <ScreenShare />
+                  <ExternalInput />
+                </>
+              )}
             </div>
           </TabsContent>
         </Tabs>

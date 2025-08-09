@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Hls from "hls.js";
 import { audioElementAtom } from "@/atoms/audio";
 import {
   currentSongAtom,
@@ -21,17 +20,18 @@ import { CoverImage } from "./player/controls/CoverImage";
 import { ControlButtons } from "./player/controls/Buttons";
 import { toFullWidth } from "@/lib/utils";
 import { useRadikoM3u8Url } from "@/services/radiko";
-
-const hls = new Hls();
+import { useHLS } from "@/hooks/hls";
 
 export function Controls() {
   const audioElement = useAtomValue(audioElementAtom);
-  const { next, play } = usePlayer();
+  const { next } = usePlayer();
   const currentSrc = useAtomValue(currentSrcAtom);
   const currentSong = useAtomValue(currentSongAtom);
   const currentRadio = useAtomValue(currentRadioAtom);
   const progressStr = useAtomValue(progressStrAtom);
   const setDisplayString = useSetAtom(displayStringAtom);
+
+  const { load, unLoad } = useHLS();
 
   const { mutate } = useRadikoM3u8Url();
 
@@ -125,6 +125,10 @@ export function Controls() {
             : `F1- ${currentRadio?.frequency?.toFixed(1) ?? "--.-"} MHz`;
         break;
 
+      case "aux":
+        displayStr = "AUX Mode";
+        break;
+
       case "off":
         displayStr = "ALL OFF";
         break;
@@ -155,26 +159,27 @@ export function Controls() {
         // m3u8 URLの期限切れを避けるために、毎回取得する
         mutate(currentRadio.id, {
           onSuccess: (m3u8) => {
-            console.log ("[HLS] Loaded new m3u8 URL:", m3u8);
-            hls.loadSource(m3u8);
-            hls.attachMedia(audioElement);
-
-            play();
+            console.log("[HLS] Loaded new m3u8 URL:", m3u8);
+            load(m3u8);
           },
         });
       } else if (currentRadio.source === "radiru") {
-        hls.loadSource(currentRadio.url);
-        hls.attachMedia(audioElement);
-
-        play();
+        load(currentRadio.url);
       }
     }
     return () => {
-      // hls.destroy();
-      hls.stopLoad();
-      hls.detachMedia();
+      unLoad();
     };
-  }, [currentSrc, audioElement, currentRadio]);
+  }, [currentSrc, currentRadio, mutate, load, unLoad]);
+
+  useEffect(() => {
+    audioElement.crossOrigin = "anonymous";
+
+    if (currentSrc === "file" && currentSong) {
+      audioElement.src = currentSong.url;
+      audioElement.load();
+    }
+  }, [audioElement, currentSrc, currentSong]);
 
   return (
     <div className="absolute inset-0 flex flex-col gap-2 w-full">

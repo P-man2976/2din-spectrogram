@@ -1,8 +1,8 @@
 import { currentSrcAtom } from "@/atoms/player";
 import { useAtomValue } from "jotai";
-import { LuMusic, LuRadioTower } from "react-icons/lu";
+import { LuLogIn, LuMusic, LuRadioTower } from "react-icons/lu";
 
-export function CoverImage({ src }: {src?: string}) {
+export function CoverImage({ src }: { src?: string }) {
   const currentSrc = useAtomValue(currentSrcAtom);
 
   return (
@@ -13,7 +13,19 @@ export function CoverImage({ src }: {src?: string}) {
           src={src}
         />
       ) : (
-        currentSrc === 'file' ? <LuMusic /> : <LuRadioTower />
+        (() => {
+          switch (currentSrc) {
+            case "file":
+              return <LuMusic />;
+            case "radio":
+              return <LuRadioTower />;
+
+            case "aux":
+              return <LuLogIn />;
+            default:
+              return null;
+          }
+        })()
       )}
     </div>
   );

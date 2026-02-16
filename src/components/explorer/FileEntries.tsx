@@ -1,6 +1,6 @@
 import { audioElementAtom } from "@/atoms/audio";
 import { useAddress } from "@/hooks/explorer";
-import { cn } from "@/lib/utils";
+import { cn, sortByName } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { DirEntry, readDir } from "@tauri-apps/plugin-fs";
 import { useAtom, useAtomValue } from "jotai";

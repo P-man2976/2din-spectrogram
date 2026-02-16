@@ -11,3 +11,15 @@ export function toFullWidth(str?: string) {
   });
   return str;
 }
+
+export function sortByName<T extends { name?: string }>(a: T, b: T) {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+
+  // names must be equal
+  return 0;
+}

@@ -77,6 +77,7 @@
         "script-src": "'self'",
         "worker-src": "'self' blob:"
       }
-    }
+    },
+    "macOSPrivateApi": true
   }
 }

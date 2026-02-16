@@ -61,7 +61,8 @@ export function RadioStation({ name, id, logo }: RadikoStation) {
         >
           <div
             className={cn(
-              "w-24 h-full grid place-content-center p-2 rounded-md shadow-md transition-all",
+              "h-full grid place-content-center p-2 rounded-md shadow-md transition-all",
+              size == "lg" && "w-24",
               isSelected
                 ? "bg-gray-300"
                 : "bg-gray-500/50 group-hover:bg-gray-400/50"

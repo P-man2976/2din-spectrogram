@@ -31,6 +31,7 @@ import {
   LuMonitor,
   LuMusic,
 } from "react-icons/lu";
+import { sortByName } from "@/lib/utils";
 
 const libraryDir = [
   {
@@ -73,7 +74,7 @@ export function ExplorerDialog({ children }: { children: ReactNode }) {
 
   const asyncFileLoad = async (file: FileEntry) => {
     if (file.children) {
-      for (const child of file.children) {
+      for (const child of file.children.toSorted(sortByName)) {
         await asyncFileLoad(child);
       }
     }
@@ -84,7 +85,7 @@ export function ExplorerDialog({ children }: { children: ReactNode }) {
 
     const {
       common: { title, track, album, artists, genre, date, year, picture },
-      format: { duration }
+      format: { duration },
     } = await fetchFromUrl(url);
 
     console.log(await fetchFromUrl(url));
@@ -118,7 +119,9 @@ export function ExplorerDialog({ children }: { children: ReactNode }) {
     mutationFn: async (files: SelectedFile[]) => {
       for (const file of files) {
         if (file.dir) {
-          for (const child of await readDir(file.path, { recursive: true })) {
+          for (const child of (
+            await readDir(file.path, { recursive: true })
+          ).toSorted(sortByName)) {
             await asyncFileLoad(child);
           }
         } else {

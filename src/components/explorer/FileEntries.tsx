@@ -1,6 +1,6 @@
 import { audioElementAtom } from "@/atoms/audio";
 import { useAddress } from "@/hooks/explorer";
-import { cn } from "@/lib/utils";
+import { cn, sortByName } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { FileEntry, readDir } from "@tauri-apps/api/fs";
 import { useAtom, useAtomValue } from "jotai";
@@ -19,7 +19,8 @@ import {
 export function FileEntries({ path }: { path: string }) {
   const { data } = useQuery({
     queryKey: ["explorer", path],
-    queryFn: async () => await readDir(path, { recursive: false }),
+    queryFn: async () =>
+      (await readDir(path, { recursive: false })).toSorted(sortByName),
   });
 
   const { data: rootdir } = useQuery({

@@ -48,8 +48,9 @@ export function RadioStation({ name, id, logo }: RadikoStation) {
       <ContextMenuTrigger asChild>
         <button
           className={cn(
-            "flex gap-2 p-2 rounded-lg cursor-pointer hover:bg-gray-500/50 transition-all group",
-            isSelected && "bg-gray-500/30 border"
+            "flex gap-2 rounded-lg cursor-pointer hover:bg-gray-500/50 transition-all group",
+            isSelected && "bg-gray-500/30 border",
+            size == "lg" && "p-2"
           )}
           onClick={() =>
             setCurrentRadio({
@@ -63,7 +64,8 @@ export function RadioStation({ name, id, logo }: RadikoStation) {
         >
           <div
             className={cn(
-              "w-24 h-full grid place-content-center p-2 rounded-md shadow-md transition-all",
+              "h-full grid place-content-center p-2 rounded-md shadow-md transition-all",
+              size == "lg" && "w-24",
               isSelected
                 ? "bg-gray-300"
                 : "bg-gray-500/50 group-hover:bg-gray-400/50"
